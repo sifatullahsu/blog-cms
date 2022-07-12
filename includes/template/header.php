@@ -1,7 +1,12 @@
-<?php include "./includes/autoload.php"; ?>
-
 <?php
+include "./includes/autoload.php";
 
+Session::init();
+
+
+if (Session::get('login') == TRUE) {
+    echo Session::get('user_id') . " - " . Session::get('user_login');
+}
 
 
 ?>
@@ -16,4 +21,10 @@
 </head>
 
 <body>
-    <header></header>
+    <header>
+        <nav>
+            <li><a href="index.php">Home</a></li>
+            <li><a href="login.php">Login</a></li>
+            <li><a href="signup.php">SignUp</a></li>
+        </nav>
+    </header>
