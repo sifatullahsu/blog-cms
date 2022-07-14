@@ -11,7 +11,7 @@ if (isset($_GET['post_type'])) {
 }
 
 if (isset($_GET['page'])) {
-    $current_page   = (int)validation($_GET['page']);
+    $current_page   = validation(check_int($_GET['page']));
 } else {
     $current_page   = 1;
 }
@@ -61,56 +61,17 @@ if (file_exists($file_name)) {
         <span><?php echo $data['post_type']; ?></span>
         <h2><?php echo $data['post_title']; ?></h2>
         <p><?php echo $data['post_excerpt']; ?></p>
-        <a href="single.php/?post_slug=<?php echo $data['post_slug']; ?>">Read More..</a>
+        <a href="single.php?post_type=<?php echo $data['post_type']; ?>&post_slug=<?php echo $data['post_slug']; ?>">Read
+            More..</a>
     </div>
     <?php
         }
     }
-    ?>
 
-    <div class="pagination">
-        <ul>
-            <?php
-            for ($i = 1; $i <= $total_page; $i++) {
-                $active = ($i == $current_page) ? 'active' : '';
-                echo "<li class='$active'><a href='archive.php/?post_type=$post_type&page=$i'>$i</a></li>";
-            }
-            ?>
-        </ul>
-    </div>
+    get_pagination($result);
+
+    ?>
 </div>
 <?php
 
 include 'includes/template/footer.php';
-
-
-/* 
-
-$pagination     = $post->pagination($current_page, 3, $post_type);
-
-$total_record   = $pagination['total_record'];
-$current_page   = $pagination['current_page'];
-$offset         = $pagination['offset'];
-$limit          = $pagination['limit'];
-
-$result         = $post->getPosts($post_type, $offset, $limit);
-
-*/
-
-
-
-
-/* $limit          = 3;
-$total_record   = $post->postsCount($post_type);
-
-if ($total_record) {
-    echo $total_record = ceil($total_record / $limit); // Output 4
-}
-
-if (isset($_GET['page'])) {
-    $page_num   = (int)validation($_GET['page']);
-    $offset     = ($page_num - 1) * $limit;
-} else {
-    $page_num   = 1;
-    $offset     = 0;
-} */

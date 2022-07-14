@@ -20,7 +20,9 @@ class Post {
         $offset     = $pagination['offset'];
         $limit      = $pagination['limit'];
 
-        $sql  = "SELECT * FROM $this->table WHERE post_type = ? ORDER BY post_id DESC LIMIT {$offset}, {$limit}";
+        $placeholder = ($post_type !== 'none') ? "WHERE post_type = ?" : "";
+
+        $sql  = "SELECT * FROM $this->table $placeholder ORDER BY post_id DESC LIMIT {$offset}, {$limit}";
         $stmt = DB::prepare($sql);
         $stmt->bindParam('1', $post_type);
         $stmt->execute();
@@ -86,5 +88,20 @@ class Post {
         ];
 
         return $array;
+    }
+
+    public function getPostBySlug($args) {
+
+        echo $post_type = $args['post_type'];
+        echo "<br>";
+        echo $post_slug = $args['post_slug'];
+
+        $sql  = "SELECT * FROM $this->table WHERE post_type = ? && post_slug = ?";
+        $stmt = DB::prepare($sql);
+        $stmt->bindParam('1', $post_type);
+        $stmt->bindParam('2', $post_slug);
+        $stmt->execute();
+
+        return $stmt->fetch();
     }
 }

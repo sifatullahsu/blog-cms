@@ -17,6 +17,7 @@ if (Session::get('login') == TRUE) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./includes/assets/css/style.css">
     <title>Blog CMS</title>
 </head>
 
@@ -28,4 +29,14 @@ if (Session::get('login') == TRUE) {
             <li><a href="signup.php">SignUp</a></li>
             <li><a href="archive.php">Archive</a></li>
         </nav>
+
+        <form action="search.php" method="GET">
+            <div>
+                <label for="query">Search</label>
+                <input type="text" name="query">
+            </div>
+            <div>
+                <input type="submit" name="search" value="Search">
+            </div>
+        </form>
     </header>

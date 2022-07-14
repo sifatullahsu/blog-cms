@@ -13,10 +13,18 @@ function validation($data) {
     return $data;
 }
 
+function check_int($int) {
+    if (is_int($int)) {
+        return $int;
+    } else {
+        return $int;
+    }
+}
+
 /** 
  * print_r function with pre tag.
  */
-function custom_print_r($array) {
+function print_r_custom($array) {
     echo "<pre>";
     $data = print_r($array);
     echo "</pre>";
@@ -28,7 +36,7 @@ function custom_print_r($array) {
 /** 
  * var_dump function with pre tag.
  */
-function custom_var_dump($data) {
+function var_dump_custom($data) {
     echo "<pre>";
     $data = var_dump($data);
     echo "</pre>";
@@ -52,4 +60,26 @@ function slug_maker($slug) {
 
 function in_array_r($item, $array) {
     return preg_match('/"' . preg_quote($item, '/') . '"/i', json_encode($array));
+}
+
+
+/**
+ * Get Pagination for $post->getPosts($args);
+ */
+function get_pagination($args) {
+    $total_page     = $args['pagination']['total_page'];
+    $current_page   = $args['pagination']['current_page'];
+    $post_type      = $args['pagination']['post_type'];
+?>
+<div class="pagination">
+    <ul>
+        <?php
+            for ($i = 1; $i <= $total_page; $i++) {
+                $active = ($i == $current_page) ? 'active' : '';
+                echo "<li class='$active'><a href='archive.php?post_type=$post_type&page=$i'>$i</a></li>";
+            }
+            ?>
+    </ul>
+</div>
+<?php
 }
