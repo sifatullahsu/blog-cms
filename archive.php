@@ -4,7 +4,6 @@ include 'includes/template/header.php';
 $post   = new Post;
 
 
-
 if (isset($_GET['post_type'])) {
     $post_type  = validation($_GET['post_type']);
 } else {
@@ -24,11 +23,33 @@ $args = array(
 );
 
 $result = $post->getPosts($args);
-
 $total_page     = $result['pagination']['total_page'];
 $current_page   = $result['pagination']['current_page'];
 
-// custom_print_r($result);
+
+
+/* ========= Check If Found Any Dedicated Archive Page For Post Type ========== */
+/* == START == */
+
+$file_name = "archive-{$post_type}.php";
+
+if (file_exists($file_name)) {
+    include $file_name;
+
+    $function = "get__{$post_type}__archive";
+
+    /**
+     * Calling Post Type Archive Function
+     * e.g. get__projects__archive
+     */
+    $function($result);
+
+    exit();
+}
+/* == END == */
+/* ========= Check If Found Any Dedicated Archive Page For Post Type ========== */
+
+
 
 ?>
 <div class="container" style="width: 1000px; margin: 0 auto; padding: 50px;">
@@ -40,7 +61,7 @@ $current_page   = $result['pagination']['current_page'];
         <span><?php echo $data['post_type']; ?></span>
         <h2><?php echo $data['post_title']; ?></h2>
         <p><?php echo $data['post_excerpt']; ?></p>
-        <a href="<?php echo $data['post_id']; ?>">Read More..</a>
+        <a href="single.php/?post_slug=<?php echo $data['post_slug']; ?>">Read More..</a>
     </div>
     <?php
         }
@@ -52,10 +73,9 @@ $current_page   = $result['pagination']['current_page'];
             <?php
             for ($i = 1; $i <= $total_page; $i++) {
                 $active = ($i == $current_page) ? 'active' : '';
-                echo "<li class='$active'><a href='archive.php?post_type=$post_type&page=$i'>$i</a></li>";
+                echo "<li class='$active'><a href='archive.php/?post_type=$post_type&page=$i'>$i</a></li>";
             }
             ?>
-
         </ul>
     </div>
 </div>
