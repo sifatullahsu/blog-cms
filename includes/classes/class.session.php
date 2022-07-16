@@ -27,8 +27,8 @@ class Session {
     }
 
     public static function destroy() {
-        session_destroy();
         session_unset();
+        session_destroy();
 
         header("Location: index.php");
     }

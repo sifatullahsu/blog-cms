@@ -52,6 +52,7 @@ if ($result) {
 
 ?>
 <div class="container" style="width: 1000px; margin: 0 auto; margin-top: 50px; padding: 50px; background: #f0f0f0;">
+    <p style="margin-bottom: 20px;">single.php?post_type=$1&post_slug=$2</p>
     <span><?php echo $result['post_type']; ?></span>
     <h1><?php echo $result['post_title']; ?></h1>
     <p><?php echo $result['post_slug']; ?></p>

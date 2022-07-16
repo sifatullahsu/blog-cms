@@ -7,6 +7,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['login'])) {
     $result = $user->user_auth($_POST);
 }
 
+if (isset($_GET['action']) && $_GET['action'] == 'logout') {
+    Session::destroy();
+}
+
 
 ?>
 <div class="container">

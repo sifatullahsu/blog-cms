@@ -28,6 +28,8 @@ if (Session::get('login') == TRUE) {
             <li><a href="login.php">Login</a></li>
             <li><a href="signup.php">SignUp</a></li>
             <li><a href="archive.php">Archive</a></li>
+            <li><a href="admin/index.php">Dashboard</a></li>
+            <li><a href="login.php?action=logout">Logout</a></li>
         </nav>
 
         <form action="search.php" method="GET">

@@ -2,7 +2,8 @@
 
 spl_autoload_register(
     function ($class) {
-        $path       = "./includes/classes/";
+        // $path       = "./includes/classes/";
+        $path       =  __DIR__ . "/classes/";
         $className  = "class.$class.php";
         $fileName   = $path . $className;
 
@@ -12,4 +13,4 @@ spl_autoload_register(
     }
 );
 
-include_once './includes/function.php';
+include_once __DIR__ . '/function.php';

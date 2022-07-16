@@ -10,7 +10,8 @@ class Post {
             'post_type'     => 'post',
             'current_page'  => NULL,
             'offset'        => NULL,
-            'limit'         => 10
+            'limit'         => 10,
+            'query'         => ''
         );
 
         $args       = array_merge($default, $args);
@@ -19,10 +20,14 @@ class Post {
         $post_type  = $pagination['post_type'];
         $offset     = $pagination['offset'];
         $limit      = $pagination['limit'];
+        $query      = $pagination['query'];
 
-        $placeholder = ($post_type !== 'none') ? "WHERE post_type = ?" : "";
+        $post_type_place = ($post_type !== 'none') ? "WHERE post_type = ?" : "";
+        $query_place     = ($query !== '') ? "WHERE post_title LIKE '%$query%'" : "";
 
-        $sql  = "SELECT * FROM $this->table $placeholder ORDER BY post_id DESC LIMIT {$offset}, {$limit}";
+
+
+        $sql  = "SELECT * FROM $this->table $post_type_place $query_place ORDER BY post_id DESC LIMIT {$offset}, {$limit}";
         $stmt = DB::prepare($sql);
         $stmt->bindParam('1', $post_type);
         $stmt->execute();
@@ -38,7 +43,10 @@ class Post {
     }
 
     public function postsCount($post_type = 'post') {
-        $sql  = "SELECT * FROM $this->table WHERE post_type = ? ORDER BY post_id DESC";
+
+        $post_type_place = ($post_type !== 'none') ? "WHERE post_type = ?" : "";
+
+        $sql  = "SELECT * FROM $this->table $post_type_place ORDER BY post_id DESC";
         $stmt = DB::prepare($sql);
         $stmt->bindParam('1', $post_type);
         $stmt->execute();
@@ -61,7 +69,8 @@ class Post {
             'post_type'     => 'post',
             'current_page'  => NULL,
             'offset'        => NULL,
-            'limit'         => 10
+            'limit'         => 10,
+            'query'         => ''
         );
 
         $args           = array_merge($default, $args);
@@ -79,12 +88,15 @@ class Post {
             $total_page = 0;
         }
 
+        $query          = $args['query'];
+
         $array = [
             'post_type'     => $post_type,
             'total_page'    => $total_page,
             'current_page'  => $current_page,
             'offset'        => $offset,
-            'limit'         => $limit
+            'limit'         => $limit,
+            'query'         => $query
         ];
 
         return $array;

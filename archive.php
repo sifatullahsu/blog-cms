@@ -63,6 +63,8 @@ if (file_exists($file_name)) {
         <p><?php echo $data['post_excerpt']; ?></p>
         <a href="single.php?post_type=<?php echo $data['post_type']; ?>&post_slug=<?php echo $data['post_slug']; ?>">Read
             More..</a>
+        <a href="<?php echo $data['post_type'] . '/' . $data['post_slug']; ?>">Read
+            More..</a>
     </div>
     <?php
         }

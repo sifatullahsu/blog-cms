@@ -51,6 +51,8 @@ class User {
         if ($result) {
             Session::set('login', TRUE);
             Session::set('user_id', $result['user_id']);
+            Session::set('user_firstname', $result['user_firstname']);
+            Session::set('user_lastname', $result['user_lastname']);
             Session::set('user_login', $result['user_login']);
             Session::set('user_role', $result['user_role']);
 
