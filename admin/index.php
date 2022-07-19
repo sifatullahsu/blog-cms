@@ -7,6 +7,8 @@ if (Session::get('login') == TRUE) {
     echo $username =  "Username: " . Session::get('user_login') . " (" . Session::get('user_id') . ")";
 }
 
+
+
 ?>
 
 

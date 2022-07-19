@@ -23,6 +23,12 @@ if (Session::get('login') != TRUE) {
         rel="stylesheet">
     <link rel="stylesheet" href="../admin/assets/css/style.css?ver<?php echo (rand(10, 1000)) ?>">
     <script src="https://kit.fontawesome.com/757cb348f3.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+    <script>
+    tinymce.init({
+        selector: 'textarea#default'
+    });
+    </script>
     <title>Admin Section</title>
 </head>
 

@@ -1,20 +1,43 @@
 <?php
 include __DIR__ . '/includes/header.php';
+// include_once ABSPATH . 'admin/includes/header.php';
 
 
-if (Session::get('login') == TRUE) {
-    echo "User: " .  Session::get('user_id') . " - " . Session::get('user_login');
+$post   = new Post;
+
+
+if (isset($_GET['post_type'])) {
+    $post_type = validation($_GET['post_type']);
+} else {
+    $post_type = 'post';
 }
 
+if (isset($_GET['page'])) {
+    $current_page   = validation(check_int($_GET['page']));
+} else {
+    $current_page   = 1;
+}
 
-echo "<br>";
-echo basename(__FILE__);
+$args = array(
+    'post_type'     => $post_type,
+    'current_page'  => $current_page,
+    'limit'         => 10
+);
+
+$result = $post->getPosts($args);
+$total_page     = $result['pagination']['total_page'];
+$current_page   = $result['pagination']['current_page'];
+
+print_r_custom($result);
 
 
 
+echo ABSPATH;
+
+?>
+
+<h2 style="margin-bottom: 20px;">Add New Post</h2>
 
 
-
-
-
+<?php
 include __DIR__ . '/includes/footer.php';

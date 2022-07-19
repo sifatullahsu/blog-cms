@@ -6,12 +6,26 @@ class Post_New {
 
     public function submit_post($args) {
 
-        $title = "Hello bangladesh";
+        $args = [
+            $args['post_author'],
+            $args['post_title'],
+            $args['post_content'],
+            $args['post_excerpt'],
+            $args['post_featured'],
+            $args['post_slug'],
+            $args['post_status'],
+            $args['post_date'],
+            $args['post_modified'],
+            $args['post_type']
+        ];
 
-        $post_type = 'post';
-        $slug = $title;
+        // return print_r_custom($args);
 
-        $this->check_slug($post_type, $slug);
+        $sql  = "INSERT INTO $this->table(post_author, post_title, post_content, post_excerpt, post_featured, post_slug, post_status, post_date, post_modified, post_type) VALUES(?,?,?,?,?,?,?,?,?,?)";
+        $stmt = DB::prepare($sql);
+        $stmt->execute($args);
+
+        return Msg::succ("Post published..");
     }
 
     /**

@@ -17,3 +17,21 @@ define('DB_HOST', 'localhost');
 
 /** MySQL database table prefix. */
 /* $table_prefix = 'tbl_'; */
+
+
+/** Absolute path to the Main directory. */
+if (!defined('ABSPATH')) {
+    define('ABSPATH', __DIR__ . './../');
+}
+
+/** Sets up WordPress vars and included files. */
+/* require_once ABSPATH . 'wp-settings.php'; */
+
+
+
+
+
+
+/* if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+} */

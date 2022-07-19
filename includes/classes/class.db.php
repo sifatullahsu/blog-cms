@@ -1,6 +1,6 @@
 <?php
 
-require("./includes/config.php");
+require(__DIR__ . "/../config.php");
 
 class DB {
 
