@@ -17,8 +17,13 @@ if (Session::get('login') == TRUE) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./includes/assets/css/style.css">
     <title>Blog CMS</title>
+
+    <!-- Bootstrap CSS Link -->
+    <link rel="stylesheet" href="./includes/assets/css/bootstrap.min.css">
+
+    <!-- Style Link -->
+    <link rel="stylesheet" href="./includes/assets/css/style.css">
 </head>
 
 <body>

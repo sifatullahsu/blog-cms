@@ -17,6 +17,5 @@ class Upload {
     public function getUploadFiles($user_role) {
 
         if ($user_role != 'administrator') return FALSE;
-        else return TRUE;
     }
 }
