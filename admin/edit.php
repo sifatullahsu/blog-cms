@@ -21,22 +21,48 @@ if (isset($_GET['page'])) {
 $args = array(
     'post_type'     => $post_type,
     'current_page'  => $current_page,
-    'limit'         => 10
+    'limit'         => 2
 );
 
 $result = $post->getPosts($args);
 $total_page     = $result['pagination']['total_page'];
 $current_page   = $result['pagination']['current_page'];
 
-print_r_custom($result);
+// print_r_custom($result);
 
 
 
-echo ABSPATH;
 
 ?>
 
 <h2 style="margin-bottom: 20px;">Add New Post</h2>
+
+<table class="table table-striped table-borderles">
+    <thead>
+        <tr>
+            <th scope="col">Title</th>
+            <th scope="col">Post Type</th>
+            <th scope="col">Author</th>
+            <th scope="col">Date</th>
+            <th scope="col">Post Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php
+        if ($result['data']) {
+            foreach ($result['data'] as $data) {
+                echo "<tr>";
+                echo "<td>" . $data['post_title'] . "</td>";
+                echo "<td>" . $data['post_type'] . "</td>";
+                echo "<td>" . $data['post_author'] . "</td>";
+                echo "<td>" . $data['post_date'] . "</td>";
+                echo "<td>" . $data['post_status'] . "</td>";
+                echo "</tr>";
+            }
+        }
+        ?>
+    </tbody>
+</table>
 
 
 <?php
